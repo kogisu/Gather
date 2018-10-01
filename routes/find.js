@@ -8,7 +8,9 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
   console.log('posting address');
   console.log('body: ', req.body);
-  google(req.body.address);
+  google(req.body.address, (location) => {
+    console.log(location.results[0].geometry.location);
+  });
 });
 
 // app.get('/items', function (req, res) {

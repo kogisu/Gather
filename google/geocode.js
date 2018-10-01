@@ -1,7 +1,7 @@
 const request = require('request');
 const config = require('../config');
 
-const googleSearch = address => { 
+const googleSearch = (address, next) => { 
   let googleAddress = address.split('').join('+');
   let API_KEY = config.API_KEY;
   let url = `https://maps.googleapis.com/maps/api/geocode/json?address=${googleAddress}&key=${API_KEY}`
@@ -10,7 +10,13 @@ const googleSearch = address => {
     if (error) {
       console.log('error occured in getting geocode: ', error);
     }
-    console.log('body: ', body);
+    // if (body.length > 1) {
+    //   res.json('Incorrect Address, please try again (results > 1)');
+    // }
+    // if (body.results.length < 1) {
+    //   res.json('Incorrect Address, please try again (results < 1)');
+    // }
+    next(JSON.parse(body));
   });
 }
 
