@@ -1,0 +1,68 @@
+{
+  "results": [
+    {
+      "address_components": [
+        {
+          "long_name": "4",
+          "short_name": "4",
+          "types": ["street_number"]
+        },
+        {
+          "long_name": "Skiff Street",
+          "short_name": "Skiff St",
+          "types": ["route"]
+        },
+        {
+          "long_name": "Hamden",
+          "short_name": "Hamden",
+          "types": ["locality", "political"]
+        },
+        {
+          "long_name": "New Haven County",
+          "short_name": "New Haven County",
+          "types": ["administrative_area_level_2", "political"]
+        },
+        {
+          "long_name": "Connecticut",
+          "short_name": "CT",
+          "types": ["administrative_area_level_1", "political"]
+        },
+        {
+          "long_name": "United States",
+          "short_name": "US",
+          "types": ["country", "political"]
+        },
+        {
+          "long_name": "06514",
+          "short_name": "06514",
+          "types": ["postal_code"]
+        }
+      ],
+      "formatted_address": "4 Skiff St, Hamden, CT 06514, USA",
+      "geometry": {
+        "location": {
+          "lat": 41.3781152,
+          "lng": -72.9173237
+        },
+        "location_type": "ROOFTOP",
+        "viewport": {
+          "northeast": {
+            "lat": 41.37946418029151,
+            "lng": -72.9159747197085
+          },
+          "southwest": {
+            "lat": 41.37676621970851,
+            "lng": -72.91867268029151
+          }
+        }
+      },
+      "place_id": "ChIJ7ZxFTWHa54kRSU5re6Foj-w",
+      "plus_code": {
+        "compound_code": "93HM+63 Hamden, Wallingford, CT, United States",
+        "global_code": "87H993HM+63"
+      },
+      "types": ["street_address"]
+    }
+  ],
+  "status": "OK"
+}
