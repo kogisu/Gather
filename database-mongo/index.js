@@ -11,15 +11,15 @@ db.once('open', function() {
   console.log('mongoose connected successfully');
 });
 
-var itemSchema = mongoose.Schema({
-  quantity: Number,
-  description: String
+var AddressSchema = mongoose.Schema({
+  name: String,
+  address: String
 });
 
-var Item = mongoose.model('Item', itemSchema);
+var Address = mongoose.model('Address', AddressSchema);
 
 var selectAll = function(callback) {
-  Item.find({}, function(err, items) {
+  Address.find({}, function(err, items) {
     if(err) {
       callback(err, null);
     } else {

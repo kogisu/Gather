@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const find = require('./routes/find');
+const find = require('../routes/find');
 const morgan = require('morgan');
 const logger = require('../middleware/logger');
 const app = express();
@@ -18,7 +18,7 @@ app.use('/find', find);
 app.use(logger);
 
 // UNCOMMENT FOR REACT
-// app.use(express.static(__dirname + '/../react-client/dist'));
+app.use(express.static(__dirname + '/../react-client/dist'));
 
 // UNCOMMENT FOR ANGULAR
 // app.use(express.static(__dirname + '/../angular-client'));
