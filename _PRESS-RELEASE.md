@@ -18,18 +18,22 @@ Once the project moves into development, the press release can be used as a touc
  
 ## Heading ##
   > Name the product in a way the reader (i.e. your target customers) will understand.
+  Vamos (Let's go).  
 
 ## Sub-Heading ##
   > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
-
+  
 ## Summary ##
   > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
+  This is a meetup app for friends to enter their home addresses, and find locations to meet up at( restaurants, bars) between the addresses. After applying filters (distances willing to travel, bars, resturants (type of food), (number ratings, stars), meetup spots are returned that are under each filter.  List of spots are displayed on the page.  Each spot will be clickable to get more information on spot.  
 
 ## Problem ##
   > Describe the problem your product solves.
+  This problem solves the issue where friends hate to travel too far, or can't decide a place to go to make everyone satisfied.  By applying both distance and spot type filters, friends are easily able to pick a place.  Best for city areas
 
 ## Solution ##
   > Describe how your product elegantly solves the problem.
+  This uses Google's API's to get information on spots, distances between friends and seamlessly displays them on a page without needing to use different pages (grubhub, google, etc).
 
 ## Quote from You ##
   > A quote from a spokesperson in your company.
