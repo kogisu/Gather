@@ -24,7 +24,7 @@ class Form extends React.Component {
     e.preventDefault();
     const value = e.target.value;
     const name = e.target.name;
-    this.setState({name: value});
+    // this.setState({[name]: value});
     this.props.search('POST', {name: this.state.name, address: this.state.address});
     // console.log('name: ', this.state.name);
     // console.log('address: ', this.state.address);

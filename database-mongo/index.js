@@ -1,7 +1,7 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/test');
 
-var db = mongoose.connection;
+const db = mongoose.connection;
 
 db.on('error', function() {
   console.log('mongoose connection error');
@@ -11,12 +11,21 @@ db.once('open', function() {
   console.log('mongoose connected successfully');
 });
 
-var AddressSchema = mongoose.Schema({
+const AddressSchema = mongoose.Schema({
   name: String,
-  address: String
+  coordinates: {
+    lat: Number,
+    lng: Number
+  }
 });
 
-var Address = mongoose.model('Address', AddressSchema);
+const Address = mongoose.model('Address', AddressSchema);
+
+const save = (data, next) => {
+  console.log('inside save');
+  Address.create(data);
+  next();
+}
 
 var selectAll = function(callback) {
   Address.find({}, function(err, items) {
@@ -28,4 +37,4 @@ var selectAll = function(callback) {
   });
 };
 
-module.exports.selectAll = selectAll;
+module.exports = {save, selectAll};
