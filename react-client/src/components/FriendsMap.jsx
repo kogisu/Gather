@@ -1,6 +1,7 @@
 import React from 'react';
 import { withScriptjs, withGoogleMap, GoogleMap } from "react-google-maps";
 import FriendMarker from './FriendMarker.jsx';
+import PropTypes from 'prop-types';
 
 const FriendsMap = withScriptjs(withGoogleMap((props) => {
 
@@ -17,5 +18,9 @@ const FriendsMap = withScriptjs(withGoogleMap((props) => {
     </div>
   );
 }));
+
+FriendsMap.PropTypes = {
+  friends: PropTypes.array.isRequired
+}
 
 export default FriendsMap;

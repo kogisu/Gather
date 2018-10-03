@@ -22,10 +22,31 @@ class App extends React.Component {
     }
     this.search = this.search.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
+    this.geoFindMe = this.geoFindMe.bind(this);
   }
 
   componentDidMount() {
-    this.search();
+    this.geoFindMe();
+    // this.search();
+  }
+
+  geoFindMe() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((geoInfo) => {
+        console.log(geoInfo);
+        let newState = [
+          {
+            name: 'kento',
+            location: {
+              lat: geoInfo.coords.latitude,
+              lng: geoInfo.coords.longitude
+            }
+          }
+        ];
+        this.setState({friends: newState});
+        console.log(this.state.friends[0].location);
+      });
+    }
   }
 
   search(method, data) {
