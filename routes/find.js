@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const geocode = require('../google/geocode');
 const db = require('../database-mongo');
+const {google} = require('googleapis');
 
 router.get('/', (req, res) => {
 });
@@ -19,6 +20,7 @@ router.post('/', (req, res) => {
     console.log('coordinates: ', coordinates);
     db.save({name, coordinates}, (coordinates) => {
       console.log('coordinates: ', coordinates);
+      
       res.status(201).end();
     });
   });
