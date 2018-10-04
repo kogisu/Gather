@@ -5,36 +5,48 @@ const db = require('../database-mongo');
 const {google} = require('googleapis');
 
 router.get('/', (req, res) => {
-});
-
-router.post('/', (req, res) => {
-
-  //Google Geocode
-  let name = req.body.name;
-  let address = req.body.address;
-  console.log('posting address');
-
-  geocode(address, (data) => {
-    let coordinates = data.results[0].geometry.location
-    console.log('name', name);
-    console.log('coordinates: ', coordinates);
-    db.save({name, coordinates}, (coordinates) => {
-      console.log('coordinates: ', coordinates);
-      
-      res.status(201).end();
-    });
+  db.selectAll('name coordinates', (err, data) => {
+    if (err) {
+      console.log('Error occured in getting data from db: ', err);
+      res.status(404).end();
+    }
+    res.status(200).json(data);
   });
 });
 
-// app.get('/items', function (req, res) {
-//   items.selectAll(function(err, data) {
-//     if(err) {
-//       res.sendStatus(500);
-//     } else {
-//       res.json(data);
-//     }
-//   });
-// });
-
+router.post('/', (req, res) => {
+  console.log('posting address');
+  let name = req.body.name;
+  let address = req.body.address;
+  if (typeof address === 'object') {
+    db.selectAll('name coordinates', (err, data) => {
+      if (err) {
+        console.log('Error occured in getting data from db: ', err);
+        res.status(404).end();
+      }
+      res.status(201).json(data);
+    });
+  } else {
+    //Google Geocode
+    geocode(address, (err, data) => {
+      if (err) {
+        console.log('Error occured in getting geocode: ', err);
+        res.status(404).end();
+      }
+      let coordinates = data.results[0].geometry.location
+      db.save({name, coordinates}, (coordinates) => {
+        console.log('coordinates: ', coordinates);
+        db.selectAll('name coordinates', (err, data) => {
+          if (err) {
+            console.log('Error occured in getting data from db: ', err);
+            res.status(404).end();
+          }
+          res.status(201).json(data);
+        });
+      });
+    });
+  }
+  
+});
 
 module.exports = router;

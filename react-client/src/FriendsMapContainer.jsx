@@ -1,7 +1,6 @@
-// DoctorMapContainer.js
-
 import React from "react";
 import FriendsMap from "./components/FriendsMap.jsx";
+import PropTypes from 'prop-types';
 const config = require('../../config');
 
 export default class FriendsMapContainer extends React.Component {
@@ -22,4 +21,8 @@ export default class FriendsMapContainer extends React.Component {
 			</div>
 		);
 	}
+}
+
+FriendsMapContainer.PropTypes = {
+	friends: PropTypes.array.isRequired
 }

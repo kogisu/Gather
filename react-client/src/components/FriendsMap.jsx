@@ -6,7 +6,8 @@ import PropTypes from 'prop-types';
 const FriendsMap = withScriptjs(withGoogleMap((props) => {
 
   const markers = props.friends.map(friend => {
-    return <FriendMarker key={friend.name} location={{lat: friend.location.lat, lng: friend.location.lng}} />
+    // console.log(friend);
+    return <FriendMarker key={friend._id} location={{lat: friend.coordinates.lat, lng: friend.coordinates.lng}} />
   });
   return (
     <div>

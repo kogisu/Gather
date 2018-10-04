@@ -36,7 +36,7 @@ class Form extends React.Component {
         <form onSubmit={this.handleSubmit} >
           Name: <input type="text" name="name" value={this.state.name} onChange={this.handleChange}/>
           Address: <input type="text" name="address" value={this.state.address} onChange={this.handleChange}/>
-          <input type="submit" value="Submit" />
+          <input type="submit" value="Gather Friend" />
         </form>
       </div>
     );

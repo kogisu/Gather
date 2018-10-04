@@ -8,7 +8,7 @@ const googleSearch = (address, next) => {
 
   request(url, (error, response, body) => {
     if (error) {
-      console.log('error occured in getting geocode: ', error);
+      next(error, null);
     }
     // if (body.length > 1) {
     //   res.json('Incorrect Address, please try again (results > 1)');
@@ -16,7 +16,7 @@ const googleSearch = (address, next) => {
     // if (body.results.length < 1) {
     //   res.json('Incorrect Address, please try again (results < 1)');
     // }
-    next(JSON.parse(body));
+    next(null, JSON.parse(body));
   });
 }
 

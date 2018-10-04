@@ -12,8 +12,9 @@ class App extends React.Component {
       items: [],
       friends: [
         {
+          _id: 0,
           name: 'kento',
-          location: {
+          coordinates: {
             lat: 41.3781152,
             lng: -72.9173237
           }
@@ -26,27 +27,44 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.geoFindMe();
+    if (navigator.geolocation) {
+      console.log('inside geolocation');
+      this.geoFindMe();
+    } else {
+      console.log('inside get request');
+      this.search('GET', null);
+    }
     // this.search();
   }
 
+  getAddresses() {
+    $.ajax({
+      url: '/find', 
+      method: method,
+      success: (data) => {
+        console.log(data);
+        this.setState({friends: data});
+      },
+      error: (err) => {
+        console.log('err', err);
+      }
+    });
+  }
+
   geoFindMe() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((geoInfo) => {
-        console.log(geoInfo);
-        let newState = [
-          {
-            name: 'kento',
-            location: {
-              lat: geoInfo.coords.latitude,
-              lng: geoInfo.coords.longitude
-            }
+    navigator.geolocation.getCurrentPosition((geoInfo) => {
+      // console.log(geoInfo);
+      let geoData = {
+          name: 'kento',
+          address: {
+            lat: geoInfo.coords.latitude,
+            lng: geoInfo.coords.longitude
           }
-        ];
-        this.setState({friends: newState});
-        console.log(this.state.friends[0].location);
-      });
-    }
+        };
+      this.search('POST', geoData);
+      // this.setState({friends: newState});
+      // console.log(this.state.friends[0].location);
+    });
   }
 
   search(method, data) {
@@ -60,9 +78,7 @@ class App extends React.Component {
       },
       success: (data) => {
         console.log(data);
-        // this.setState({
-        //   items: data
-        // });
+        this.setState({friends: data});
       },
       error: (err) => {
         console.log('err', err);
