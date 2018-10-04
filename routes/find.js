@@ -17,17 +17,23 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
   console.log('posting address');
   let name = req.body.name;
-  let address = req.body.address;
-  if (typeof address === 'object') {
-    db.selectAll('name coordinates', (err, data) => {
-      if (err) {
-        console.log('Error occured in getting data from db: ', err);
-        res.status(404).end();
-      }
-      res.status(201).json(data);
+  let coordinates = req.body.address;
+  if (typeof coordinates === 'object') {
+    console.log('Saving Geodata');
+    db.save({name, coordinates}, (coordinates) => {
+      console.log('coordinates: ', coordinates);
+      db.selectAll(null, 'name coordinates', (err, data) => {
+        if (err) {
+          console.log('Error occured in getting data from db: ', err);
+          res.status(404).end();
+        }
+        res.status(201).json(data);
+      });
     });
   } else {
     //Google Geocode
+    console.log('Posting new address');
+    let address = req.body.address;
     geocode(address, (err, data) => {
       if (err) {
         console.log('Error occured in getting geocode: ', err);
@@ -36,7 +42,7 @@ router.post('/', (req, res) => {
       let coordinates = data.results[0].geometry.location
       db.save({name, coordinates}, (coordinates) => {
         console.log('coordinates: ', coordinates);
-        db.selectAll('name coordinates', (err, data) => {
+        db.selectAll(null, 'name coordinates', (err, data) => {
           if (err) {
             console.log('Error occured in getting data from db: ', err);
             res.status(404).end();

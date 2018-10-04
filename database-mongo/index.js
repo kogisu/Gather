@@ -22,14 +22,23 @@ const AddressSchema = mongoose.Schema({
 const Address = mongoose.model('Address', AddressSchema);
 
 module.exports = {
-  save: (data, next) => {
-    console.log('inside save');
-    Address.create(data);
-    next(data);
+  save: function(data, next) {
+    let queries = {name: data.name}
+    this.selectAll(queries, null, (err, results) => {
+      if (err) {
+        console.log('error in saving to db');
+      } else if (results.length < 1) {
+        Address.create(data, (err, data) => {
+          next(data);
+        });
+      } else {
+        next(null);
+      }
+    });
   },
-  selectAll: (fields, callback) => {
-    Address.find({}, fields, (err, items) => {
-      console.log('fields: ', fields);
+  selectAll: function(queries, fields, callback) {
+    queries = queries || {};
+    Address.find(queries, fields, (err, items) => {
       if(err) {
         callback(err, null);
       } else {
