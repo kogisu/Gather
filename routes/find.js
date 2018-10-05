@@ -39,10 +39,21 @@ router.post('/', (req, res) => {
         console.log('Error occured in getting geocode: ', err);
         res.status(404).end();
       }
-      console.log('data: ', data);
-      let coordinates = data.results[0].geometry.location
-      db.save({name, coordinates}, (coordinates) => {
-        console.log('coordinates: ', coordinates);
+
+      if (data.results.length === 1) {
+        console.log('data: ', data);
+        let coordinates = data.results[0].geometry.location
+        db.save({name, coordinates}, (coordinates) => {
+          console.log('coordinates: ', coordinates);
+          db.selectAll(null, 'name coordinates', (err, data) => {
+            if (err) {
+              console.log('Error occured in getting data from db: ', err);
+              res.status(404).end();
+            }
+            res.status(201).json(data);
+          });
+        });
+      } else {
         db.selectAll(null, 'name coordinates', (err, data) => {
           if (err) {
             console.log('Error occured in getting data from db: ', err);
@@ -50,7 +61,7 @@ router.post('/', (req, res) => {
           }
           res.status(201).json(data);
         });
-      });
+      }
     });
   }
   
