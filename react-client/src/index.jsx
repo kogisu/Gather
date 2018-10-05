@@ -4,6 +4,8 @@ import $ from 'jquery';
 import List from './components/List.jsx';
 import Form from './components/Form.jsx';
 import FriendsMapContainer from './FriendsMapContainer.jsx';
+import AvgPoint from './components/AvgPoint.jsx';
+import {calculateAvgPt} from '../../helpers/utils';
 
 class App extends React.Component {
   constructor(props) {
@@ -19,7 +21,8 @@ class App extends React.Component {
             lng: -72.9173237
           }
         }
-      ]
+      ],
+      avgPoint: {}
     }
     this.search = this.search.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
@@ -55,7 +58,7 @@ class App extends React.Component {
     navigator.geolocation.getCurrentPosition((geoInfo) => {
       // console.log(geoInfo);
       let geoData = {
-          name: 'kento',
+          name: 'user',
           address: {
             lat: geoInfo.coords.latitude,
             lng: geoInfo.coords.longitude
@@ -78,7 +81,8 @@ class App extends React.Component {
       },
       success: (data) => {
         console.log(data);
-        this.setState({friends: data});
+        let avgPoint = calculateAvgPt(data);
+        this.setState({friends: data, avgPoint: avgPoint});
       },
       error: (err) => {
         console.log('err', err);
@@ -95,7 +99,8 @@ class App extends React.Component {
     return (<div>
       <h1>Item List</h1>
       <Form search={this.search}/>
-      <FriendsMapContainer friends={this.state.friends} /> 
+      <FriendsMapContainer friends={this.state.friends} avgPoint={this.state.avgPoint}/>
+      <AvgPoint avgPoint={this.state.avgPoint}/>
       {/* <List items={this.state.items}/> */}
     </div>)
   }

@@ -12,15 +12,16 @@ const FriendsMap = withScriptjs(withGoogleMap((props) => {
   return (
     <div>
       <GoogleMap 
-        defaultZoom={14} 
-        defaultCenter={{lat: 41.3781152, lng: -72.9173237}}>
+        defaultZoom={4} 
+        defaultCenter={props.avgPoint.lat ? {lat: props.avgPoint.lat, lng: props.avgPoint.lng} : {lat: 0, lng: 0}}
+        center={new google.maps.LatLng(props.avgPoint.lat, props.avgPoint.lng)}>
         {markers}
       </GoogleMap>
     </div>
   );
 }));
 
-FriendsMap.PropTypes = {
+FriendsMap.propTypes = {
   friends: PropTypes.array.isRequired
 }
 

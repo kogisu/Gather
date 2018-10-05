@@ -39,6 +39,7 @@ router.post('/', (req, res) => {
         console.log('Error occured in getting geocode: ', err);
         res.status(404).end();
       }
+      console.log('data: ', data);
       let coordinates = data.results[0].geometry.location
       db.save({name, coordinates}, (coordinates) => {
         console.log('coordinates: ', coordinates);
