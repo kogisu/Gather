@@ -17,10 +17,10 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
   console.log('posting address');
   let name = req.body.name;
-  let coordinates = req.body.address;
-
+  let address = req.body.address;
+  
   //When Mounting Page
-  if (typeof coordinates === 'object') {
+  if (typeof address === 'object') {
     console.log('Saving Geodata');
 
     let lat = JSON.parse(req.body.address.lat).toFixed(3);
@@ -39,7 +39,6 @@ router.post('/', (req, res) => {
   } else {
     //Google Geocode
     console.log('Posting new address');
-    let address = req.body.address;
     geocode(address, (err, data) => {
       if (err) {
         console.log('Error occured in getting geocode: ', err);
