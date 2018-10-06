@@ -18,8 +18,14 @@ router.post('/', (req, res) => {
   console.log('posting address');
   let name = req.body.name;
   let coordinates = req.body.address;
+
+  //When Mounting Page
   if (typeof coordinates === 'object') {
     console.log('Saving Geodata');
+
+    let lat = JSON.parse(req.body.address.lat).toFixed(3);
+    let lng = JSON.parse(req.body.address.lng).toFixed(3);
+    let coordinates = {lat, lng};
     db.save({name, coordinates}, (coordinates) => {
       console.log('coordinates: ', coordinates);
       db.selectAll(null, 'name coordinates', (err, data) => {

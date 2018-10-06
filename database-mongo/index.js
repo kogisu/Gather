@@ -23,8 +23,16 @@ const Address = mongoose.model('Address', AddressSchema);
 
 module.exports = {
   save: function(data, next) {
-    let queries = {name: data.name}
+    let queries = {
+      coordinates: {
+        lat: data.coordinates.lat,
+        lng: data.coordinates.lng
+      }
+    };
+
     this.selectAll(queries, null, (err, results) => {
+      console.log('queries: ',queries);
+      console.log('results: ', results);
       if (err) {
         console.log('error in saving to db');
       } else if (results.length < 1) {
