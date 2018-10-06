@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import List from './components/List.jsx';
-import Form from './components/Form.jsx';
+import FriendForm from './components/FriendForm.jsx';
+import PlacesForm from './components/PlacesForm.jsx';
 import FriendsMapContainer from './FriendsMapContainer.jsx';
 import AvgPoint from './components/AvgPoint.jsx';
 import {calculateAvgPt} from '../../helpers/utils';
@@ -104,9 +105,10 @@ class App extends React.Component {
   render () {
     return (<div>
       <h1>Item List</h1>
-      <Form search={this.search}/>
-      <FriendsMapContainer friends={this.state.friends} avgPoint={this.state.avgPoint}/>
-      <AvgPoint avgPoint={this.state.avgPoint}/>
+      <FriendForm search={this.search}/><br/>
+      <FriendsMapContainer friends={this.state.friends} avgPoint={this.state.avgPoint}/><br/>
+      <AvgPoint avgPoint={this.state.avgPoint}/><br/>
+      <PlacesForm />
       {/* <List items={this.state.items}/> */}
     </div>)
   }

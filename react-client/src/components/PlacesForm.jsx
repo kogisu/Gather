@@ -1,11 +1,10 @@
 import React from 'react';
 
-class Form extends React.Component {
+export default class FriendForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      address: ''
+      places: ''
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -13,8 +12,7 @@ class Form extends React.Component {
   
   handleChange(e) {
     const value = e.target.value;
-    const name = e.target.name;
-    this.setState({[name]: value});
+    this.setState({places: value});
   }
 
   handleSubmit(e) {
@@ -22,10 +20,9 @@ class Form extends React.Component {
     console.log('submitted');
     console.log('props: ', this.props);
     e.preventDefault();
-    const value = e.target.value;
-    const name = e.target.name;
+    // const value = e.target.value;
     // this.setState({[name]: value});
-    this.props.search('POST', {name: this.state.name, address: this.state.address});
+    // this.props.search('POST', {name: this.state.name, address: this.state.address});
     // console.log('name: ', this.state.name);
     // console.log('address: ', this.state.address);
   }
@@ -33,14 +30,11 @@ class Form extends React.Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit} >
-          Name: <input type="text" name="name" value={this.state.name} onChange={this.handleChange}/>
-          Address: <input type="text" name="address" value={this.state.address} onChange={this.handleChange}/>
-          <input type="submit" value="Gather Friend" />
+        <form onSubmit={this.handleSubmit} action="http://127.0.0.1:3000?places" method="GET">
+          Places: <input type="text" name="places" value={this.state.places} onChange={this.handleChange}/>
+          <input type="submit" value="Search Places" />
         </form>
       </div>
     );
   }
 }
-
-export default Form;
