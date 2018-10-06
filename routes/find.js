@@ -47,7 +47,9 @@ router.post('/', (req, res) => {
 
       if (data.results.length === 1) {
         console.log('data: ', data);
-        let coordinates = data.results[0].geometry.location
+        let lat = JSON.parse(data.results[0].geometry.location.lat).toFixed(3);
+        let lng = JSON.parse(data.results[0].geometry.location.lng).toFixed(3);
+        let coordinates = {lat, lng};
         db.save({name, coordinates}, (coordinates) => {
           console.log('coordinates: ', coordinates);
           db.selectAll(null, 'name coordinates', (err, data) => {
