@@ -36,7 +36,7 @@ class App extends React.Component {
       this.geoFindMe();
     } else {
       console.log('inside get request');
-      this.search('GET', null);
+      this.search('/find?friends', 'GET', null);
     }
     // this.search();
   }
@@ -65,21 +65,26 @@ class App extends React.Component {
             lng: geoInfo.coords.longitude
           }
         };
-      this.search('POST', geoData);
+      this.search('/find?friends', 'POST', geoData);
       // this.setState({friends: newState});
       // console.log(this.state.friends[0].location);
     });
   }
 
-  search(method, data) {
-    console.log('data', data);
-    $.ajax({
-      url: '/find', 
-      method: method,
-      data: {
+  search(url, method, data) {
+    url = url || '/find';
+    let ajaxData;
+    if (data) {
+      ajaxData = {
         name: data.name,
         address: data.address
-      },
+      };
+    }
+    console.log('data', data);
+    $.ajax({
+      url: url, 
+      method: method,
+      data: ajaxData,
       success: (data) => {
         console.log(data);
         if (data.fail === 0) {
@@ -108,7 +113,7 @@ class App extends React.Component {
       <FriendForm search={this.search}/><br/>
       <FriendsMapContainer friends={this.state.friends} avgPoint={this.state.avgPoint}/><br/>
       <AvgPoint avgPoint={this.state.avgPoint}/><br/>
-      <PlacesForm />
+      <PlacesForm search={this.search}/>
       {/* <List items={this.state.items}/> */}
     </div>)
   }

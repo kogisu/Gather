@@ -5,7 +5,8 @@ const db = require('../database-mongo');
 const {google} = require('googleapis');
 
 router.get('/', (req, res) => {
-  db.selectAll('name coordinates', (err, data) => {
+  console.log('query: ', req.query);
+  db.selectAll(null, 'name coordinates', (err, data) => {
     if (err) {
       console.log('Error occured in getting data from db: ', err);
       res.status(404).end();

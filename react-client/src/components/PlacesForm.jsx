@@ -20,17 +20,13 @@ export default class FriendForm extends React.Component {
     console.log('submitted');
     console.log('props: ', this.props);
     e.preventDefault();
-    // const value = e.target.value;
-    // this.setState({[name]: value});
-    // this.props.search('POST', {name: this.state.name, address: this.state.address});
-    // console.log('name: ', this.state.name);
-    // console.log('address: ', this.state.address);
+    this.props.search('/find?friends', 'GET', null);
   }
 
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit} action="http://127.0.0.1:3000?places" method="GET">
+        <form onSubmit={this.handleSubmit}>
           Places: <input type="text" name="places" value={this.state.places} onChange={this.handleChange}/>
           <input type="submit" value="Search Places" />
         </form>
