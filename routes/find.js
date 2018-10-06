@@ -53,14 +53,10 @@ router.post('/', (req, res) => {
             res.status(201).json(data);
           });
         });
+      } else if (data.results.length === 0) {
+        res.status(201).json({fail: 0});
       } else {
-        db.selectAll(null, 'name coordinates', (err, data) => {
-          if (err) {
-            console.log('Error occured in getting data from db: ', err);
-            res.status(404).end();
-          }
-          res.status(201).json(data);
-        });
+        res.status(201).json({fail: 1});
       }
     });
   }

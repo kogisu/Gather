@@ -81,8 +81,14 @@ class App extends React.Component {
       },
       success: (data) => {
         console.log(data);
-        let avgPoint = calculateAvgPt(data);
-        this.setState({friends: data, avgPoint: avgPoint});
+        if (data.fail === 0) {
+          alert('Entered Address does not exist.  Please try again');
+        } else if (data.fail === 1) {
+          alert('Entered Address Produces more than one result.  Please try again');
+        } else {
+          let avgPoint = calculateAvgPt(data);
+          this.setState({friends: data, avgPoint: avgPoint});
+        }
       },
       error: (err) => {
         console.log('err', err);
