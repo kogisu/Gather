@@ -22,7 +22,7 @@ const AddressSchema = mongoose.Schema({
 const Address = mongoose.model('Address', AddressSchema);
 
 module.exports = {
-  save: function(data, next) {
+  saveFriend: function(data, next) {
     let queries = {
       coordinates: {
         lat: JSON.parse(data.coordinates.lat),

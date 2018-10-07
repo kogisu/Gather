@@ -20,7 +20,7 @@ export default class FriendForm extends React.Component {
     console.log('submitted');
     console.log('props: ', this.props);
     e.preventDefault();
-    this.props.search('/find?friends', 'GET', null);
+    this.props.searchPlaces('/find?places=1', 'POST', {places: this.state.places, avgPoint: this.props.avgPoint});
   }
 
   render() {

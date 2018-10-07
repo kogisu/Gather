@@ -25,7 +25,7 @@ export default class FriendForm extends React.Component {
     const value = e.target.value;
     const name = e.target.name;
     // this.setState({[name]: value});
-    this.props.search('/find?friends', 'POST', {name: this.state.name, address: this.state.address});
+    this.props.searchFriends('/find?friends=1', 'POST', {name: this.state.name, address: this.state.address});
     // console.log('name: ', this.state.name);
     // console.log('address: ', this.state.address);
   }

@@ -25,8 +25,8 @@ class App extends React.Component {
       ],
       avgPoint: {}
     }
-    this.search = this.search.bind(this);
-    this.handleSearch = this.handleSearch.bind(this);
+    this.searchFriends = this.searchFriends.bind(this);
+    this.searchPlaces = this.searchPlaces.bind(this);
     this.geoFindMe = this.geoFindMe.bind(this);
   }
 
@@ -36,7 +36,7 @@ class App extends React.Component {
       this.geoFindMe();
     } else {
       console.log('inside get request');
-      this.search('/find?friends', 'GET', null);
+      this.searchFriends('/find?friends=1', 'GET', null);
     }
     // this.search();
   }
@@ -65,26 +65,20 @@ class App extends React.Component {
             lng: geoInfo.coords.longitude
           }
         };
-      this.search('/find?friends', 'POST', geoData);
+      this.searchFriends('/find?findme=1', 'POST', geoData);
       // this.setState({friends: newState});
       // console.log(this.state.friends[0].location);
     });
   }
 
-  search(url, method, data) {
+  searchFriends(url, method, data) {
     url = url || '/find';
-    let ajaxData;
-    if (data) {
-      ajaxData = {
-        name: data.name,
-        address: data.address
-      };
-    }
     console.log('data', data);
+
     $.ajax({
       url: url, 
       method: method,
-      data: ajaxData,
+      data: data,
       success: (data) => {
         console.log(data);
         if (data.fail === 0) {
@@ -102,18 +96,30 @@ class App extends React.Component {
     });
   }
 
-  handleSearch() {
-    console.log('inside handleSearch');
-    this.search();
+  searchPlaces(url, method, data) {
+    url = url || '/find';
+    console.log('data', data);
+
+    $.ajax({
+      url: url, 
+      method: method,
+      data: data,
+      success: (data) => {
+        console.log(data);
+      },
+      error: (err) => {
+        console.log('err', err);
+      }
+    });
   }
 
   render () {
     return (<div>
       <h1>Item List</h1>
-      <FriendForm search={this.search}/><br/>
+      <FriendForm search={this.searchFriends}/><br/>
       <FriendsMapContainer friends={this.state.friends} avgPoint={this.state.avgPoint}/><br/>
       <AvgPoint avgPoint={this.state.avgPoint}/><br/>
-      <PlacesForm search={this.search}/>
+      <PlacesForm searchPlaces={this.searchPlaces} avgPoint={this.state.avgPoint}/>
       {/* <List items={this.state.items}/> */}
     </div>)
   }

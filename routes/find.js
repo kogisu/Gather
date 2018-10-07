@@ -3,6 +3,7 @@ const router = express.Router();
 const geocode = require('../google/geocode');
 const db = require('../database-mongo');
 const {google} = require('googleapis');
+const places = require('../google/places');
 
 router.get('/', (req, res) => {
   console.log('query: ', req.query);
@@ -17,17 +18,17 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
   console.log('posting address');
+  console.log('query: ', req.query);
   let name = req.body.name;
   let address = req.body.address;
-  
-  //When Mounting Page
-  if (typeof address === 'object') {
-    console.log('Saving Geodata');
 
+  if (req.query.findme) {
+    console.log('Saving Geodata');
     let lat = JSON.parse(req.body.address.lat).toFixed(3);
     let lng = JSON.parse(req.body.address.lng).toFixed(3);
     let coordinates = {lat, lng};
-    db.save({name, coordinates}, (coordinates) => {
+
+    db.saveFriend({name, coordinates}, (coordinates) => {
       console.log('coordinates: ', coordinates);
       db.selectAll(null, 'name coordinates', (err, data) => {
         if (err) {
@@ -37,9 +38,10 @@ router.post('/', (req, res) => {
         res.status(201).json(data);
       });
     });
-  } else {
-    //Google Geocode
+  } else if (req.query.friends) {
     console.log('Posting new address');
+    
+    //Google Geocode
     geocode(address, (err, data) => {
       if (err) {
         console.log('Error occured in getting geocode: ', err);
@@ -51,7 +53,7 @@ router.post('/', (req, res) => {
         let lat = JSON.parse(data.results[0].geometry.location.lat).toFixed(3);
         let lng = JSON.parse(data.results[0].geometry.location.lng).toFixed(3);
         let coordinates = {lat, lng};
-        db.save({name, coordinates}, (coordinates) => {
+        db.saveFriend({name, coordinates}, (coordinates) => {
           console.log('coordinates: ', coordinates);
           db.selectAll(null, 'name coordinates', (err, data) => {
             if (err) {
@@ -67,8 +69,18 @@ router.post('/', (req, res) => {
         res.status(201).json({fail: 1});
       }
     });
+  } else if (req.query.places) {
+    console.log('places search:', req.body);
+    let searchString = req.body.places;
+    let distance = 10000; //meters
+    let coordinates = req.body.avgPoint;
+
+    places(searchString, distance, coordinates)
+    .then(places => {
+      console.log(places);
+      res.status(201).json(places);
+    });
   }
-  
 });
 
 module.exports = router;
