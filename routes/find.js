@@ -72,13 +72,16 @@ router.post('/', (req, res) => {
   } else if (req.query.places) {
     console.log('places search:', req.body);
     let searchString = req.body.places;
-    let distance = 10000; //meters
+    let distance = 5000; //meters
     let coordinates = req.body.avgPoint;
 
     places(searchString, distance, coordinates)
     .then(places => {
-      console.log(places);
-      res.status(201).json(places);
+      // console.log('results: ', places.results);
+      return db.savePlace(places.results);
+    })
+    .then(() => {
+      res.status(201).end();
     });
   }
 });

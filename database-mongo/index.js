@@ -1,3 +1,4 @@
+const details = require('../google/details');
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/test');
 
@@ -21,6 +22,17 @@ const AddressSchema = mongoose.Schema({
 
 const Address = mongoose.model('Address', AddressSchema);
 
+const PlaceSchema = mongoose.Schema({
+  name: String,
+  rating: Number,
+  address: String,
+  url: String,
+  website: String,
+  phone: String
+});
+
+const Place = mongoose.model('Place', PlaceSchema);
+
 module.exports = {
   saveFriend: function(data, next) {
     let queries = {
@@ -42,6 +54,24 @@ module.exports = {
       }
     });
   },
+  savePlace: function(places) {
+    let completed = 1;
+    return new Promise((resolve) => {
+      places.forEach((place, index) => {
+        details(place.place_id)
+        .then(place => {
+          console.log('place: ', index);
+          // Address.create(Place, (err, data) => {  
+          // });
+          completed++;
+          if (completed === places.length) {
+            console.log('resolved');
+            resolve();
+          }
+        });
+      });
+    });
+  },
   selectAll: function(queries, fields, callback) {
     queries = queries || {};
     Address.find(queries, fields, (err, items) => {
@@ -50,8 +80,7 @@ module.exports = {
       } else {
         callback(null, items);
       }
-    })
-    .select(fields);
+    });
   }
 }
 
