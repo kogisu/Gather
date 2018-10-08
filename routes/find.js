@@ -88,7 +88,10 @@ router.post('/', (req, res) => {
       return db.savePlace(places.results);
     })
     .then(() => {
-      res.status(201).end();
+      db.selectAll('Place', null, null)
+      .then((places) => {
+        res.status(201).json(places);
+      });
     });
   }
 });

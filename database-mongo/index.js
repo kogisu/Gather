@@ -28,7 +28,11 @@ const PlaceSchema = mongoose.Schema({
   address: String,
   url: String,
   website: String,
-  phone: String
+  phone: String,
+  hours: {
+    open: Boolean,
+    weekday_hours: [String]
+  }
 });
 
 const Place = mongoose.model('Place', PlaceSchema);
@@ -59,18 +63,42 @@ module.exports = {
   },
   savePlace: function(places) {
     let completed = 1;
-    return new Promise((resolve) => {
-      places.forEach((place, index) => {
+    return new Promise((resolve, reject) => {
+      places.forEach(place => {
         details(place.place_id)
         .then(place => {
-          console.log('place: ', index, 'completed: ', completed);
-          // Address.create(Place, (err, data) => {  
-          // });
-          completed++;
-          if (completed === places.length) {
-            console.log('resolved');
-            resolve();
+          let pl = place.result;
+          let PlaceObj = {
+            name: pl.name,
+            rating: pl.rating,
+            address: pl.formatted_address,
+            url: pl.url,
+            website: pl.website ,
+            phone: pl.formatted_phone_number
           }
+          if (pl.opening_hours) {
+            PlaceObj.hours = {
+              open: pl.opening_hours.open_now,
+              weekday_hours: pl.opening_hours.weekday_text
+            }
+          } else {
+            PlaceObj.hours = {
+              open: '',
+              weekday_hours: ''
+            }
+          }
+
+          Place.create(PlaceObj, (err, data) => {  
+            console.log('completed: ', completed);
+            if (err) {
+              reject(err);
+            }
+            if (completed === places.length) {
+              console.log('resolved');
+              resolve(data);
+            }
+            completed++;
+          });
         });
       });
     });
