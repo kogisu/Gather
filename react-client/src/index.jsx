@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-import List from './components/List.jsx';
+import Places from './components/Places.jsx';
 import FriendForm from './components/FriendForm.jsx';
 import PlacesForm from './components/PlacesForm.jsx';
 import FriendsMapContainer from './FriendsMapContainer.jsx';
@@ -12,7 +12,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      items: [],
+      places: [],
       friends: [
         {
           _id: 0,
@@ -106,6 +106,7 @@ class App extends React.Component {
       data: data,
       success: (data) => {
         console.log(data);
+        this.setState({places: data});
       },
       error: (err) => {
         console.log('err', err);
@@ -119,8 +120,8 @@ class App extends React.Component {
       <FriendForm search={this.searchFriends}/><br/>
       <FriendsMapContainer friends={this.state.friends} avgPoint={this.state.avgPoint}/><br/>
       <AvgPoint avgPoint={this.state.avgPoint}/><br/>
-      <PlacesForm searchPlaces={this.searchPlaces} avgPoint={this.state.avgPoint}/>
-      {/* <List items={this.state.items}/> */}
+      <PlacesForm searchPlaces={this.searchPlaces} avgPoint={this.state.avgPoint}/><br/>
+      <Places places={this.state.places}/>
     </div>)
   }
 }
