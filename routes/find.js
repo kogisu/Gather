@@ -7,12 +7,13 @@ const places = require('../google/places');
 
 router.get('/', (req, res) => {
   console.log('query: ', req.query);
-  db.selectAll(null, 'name coordinates', (err, data) => {
-    if (err) {
-      console.log('Error occured in getting data from db: ', err);
-      res.status(404).end();
-    }
-    res.status(200).json(data);
+
+  db.selectAll('Address', null, 'name coordinates')
+  .then((data) => {
+    res.status(201).json(data);
+  })
+  .catch(err => {
+    console.log('error occured in getting addresses from db: ', err);
   });
 });
 
@@ -28,15 +29,18 @@ router.post('/', (req, res) => {
     let lng = JSON.parse(req.body.address.lng).toFixed(3);
     let coordinates = {lat, lng};
 
-    db.saveFriend({name, coordinates}, (coordinates) => {
-      console.log('coordinates: ', coordinates);
-      db.selectAll(null, 'name coordinates', (err, data) => {
-        if (err) {
-          console.log('Error occured in getting data from db: ', err);
-          res.status(404).end();
-        }
+    db.saveFriend({name, coordinates})
+    .then(coordinates => {
+      db.selectAll('Address', null, 'name coordinates')
+      .then((data) => {
         res.status(201).json(data);
+      })
+      .catch(err => {
+        console.log('error occured in getting addresses from db: ', err);
       });
+    })
+    .catch(err => {
+      console.log('error occured in saving address to db: ', err);
     });
   } else if (req.query.friends) {
     console.log('Posting new address');
@@ -53,15 +57,18 @@ router.post('/', (req, res) => {
         let lat = JSON.parse(data.results[0].geometry.location.lat).toFixed(3);
         let lng = JSON.parse(data.results[0].geometry.location.lng).toFixed(3);
         let coordinates = {lat, lng};
-        db.saveFriend({name, coordinates}, (coordinates) => {
-          console.log('coordinates: ', coordinates);
-          db.selectAll(null, 'name coordinates', (err, data) => {
-            if (err) {
-              console.log('Error occured in getting data from db: ', err);
-              res.status(404).end();
-            }
+        db.saveFriend({name, coordinates})
+        .then(coordinates => {
+          db.selectAll('Address', null, 'name coordinates')
+          .then((data) => {
             res.status(201).json(data);
+          })
+          .catch(err => {
+            console.log('error occured in getting addresses from db: ', err);
           });
+        })
+        .catch(err => {
+          console.log('error occured in saving address to db: ', err);
         });
       } else if (data.results.length === 0) {
         res.status(201).json({fail: 0});

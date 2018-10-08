@@ -41,17 +41,20 @@ module.exports = {
         lng: JSON.parse(data.coordinates.lng)
       }
     };
-
-    this.selectAll(queries, null, (err, results) => {
-      if (err) {
-        console.log('error in saving to db');
-      } else if (results.length < 1) {
-        Address.create(data, (err, data) => {
-          next(data);
-        });
-      } else {
-        next(null);
-      }
+    return new Promise((resolve, reject) => {
+      this.selectAll('Address', queries, null)
+      .then(results => {
+        if (results.length < 1) {
+          Address.create(data, (err, data) => {
+            resolve(data);
+          });
+        } else {
+          resolve(null);
+        }
+      })
+      .catch(err => {
+        console.log('error occured in finding address in db: ', err);
+      });
     });
   },
   savePlace: function(places) {
@@ -60,7 +63,7 @@ module.exports = {
       places.forEach((place, index) => {
         details(place.place_id)
         .then(place => {
-          console.log('place: ', index);
+          console.log('place: ', index, 'completed: ', completed);
           // Address.create(Place, (err, data) => {  
           // });
           completed++;
@@ -72,13 +75,26 @@ module.exports = {
       });
     });
   },
-  selectAll: function(queries, fields, callback) {
+  selectAll: function(model, queries, fields) {
     queries = queries || {};
-    Address.find(queries, fields, (err, items) => {
-      if(err) {
-        callback(err, null);
+
+    return new Promise((resolve, reject) => {
+      if (model === 'Address') {
+        Address.find(queries, fields, (err, items) => {
+          if(err) {
+            reject(err);
+          } else {
+            resolve(items);
+          }
+        });
       } else {
-        callback(null, items);
+        Place.find(queries, fields, (err, items) => {
+          if(err) {
+            reject(err);
+          } else {
+            resolve(items);
+          }
+        });
       }
     });
   }
