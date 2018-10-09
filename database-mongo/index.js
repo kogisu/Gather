@@ -32,7 +32,11 @@ const PlaceSchema = mongoose.Schema({
   hours: {
     open: Boolean,
     weekday_hours: [String]
-  }
+  },
+  icon: String,
+  reviews: Number,
+  types: [String],
+  price: Number
 });
 
 const Place = mongoose.model('Place', PlaceSchema);
@@ -64,7 +68,8 @@ module.exports = {
   savePlace: function(places) {
     let completed = 1;
     return new Promise((resolve, reject) => {
-      places.forEach(place => {
+      places.forEach((place, index) => {
+        if (index === 0) {console.log('place: ', place); }
         details(place.place_id)
         .then(place => {
           let pl = place.result;
@@ -74,7 +79,11 @@ module.exports = {
             address: pl.formatted_address,
             url: pl.url,
             website: pl.website ,
-            phone: pl.formatted_phone_number
+            phone: pl.formatted_phone_number,
+            icon: pl.icon,
+            types: pl.types || [],
+            price: pl.price_level,
+            reviews: pl.reviews.length || 0
           }
           if (pl.opening_hours) {
             PlaceObj.hours = {
@@ -89,7 +98,7 @@ module.exports = {
           }
 
           Place.create(PlaceObj, (err, data) => {  
-            console.log('completed: ', completed);
+            // console.log('completed: ', completed);
             if (err) {
               reject(err);
             }
