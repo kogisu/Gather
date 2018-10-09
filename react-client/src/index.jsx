@@ -24,7 +24,8 @@ class App extends React.Component {
           }
         }
       ],
-      avgPoint: {}
+      avgPoint: {},
+      searches: {}
     }
     this.searchFriends = this.searchFriends.bind(this);
     this.searchPlaces = this.searchPlaces.bind(this);
@@ -101,15 +102,25 @@ class App extends React.Component {
 
   searchPlaces(url, method, data) {
     url = url || '/find';
-    console.log('data', data);
-
+    // console.log('data', data);
+    if (method === 'POST' && this.state.searches[data.places]) {
+      alert('You already searched this! Search something else');
+      return;
+    }
     $.ajax({
       url: url, 
       method: method,
       data: data,
-      success: (data) => {
-        console.log(data);
-        this.setState({places: data});
+      success: (results) => {
+        console.log(results);
+        if (method === 'POST') {
+          let newSearches = this.state.searches;
+          newSearches[data.places] = 1;
+          this.setState({places: results, searches: newSearches});
+        } else {
+          this.setState({places: results});
+        }
+        console.log('searches: ', this.state.searches);
       },
       error: (err) => {
         console.log('err', err);
