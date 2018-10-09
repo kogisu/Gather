@@ -38,6 +38,7 @@ class App extends React.Component {
     } else {
       console.log('inside get request');
       this.searchFriends('/find?friends=1', 'GET', null);
+      this.searchPlaces('/find?places=1', 'GET', null);
     }
     // this.search();
   }
@@ -67,6 +68,7 @@ class App extends React.Component {
           }
         };
       this.searchFriends('/find?findme=1', 'POST', geoData);
+      this.searchPlaces('/find?places=1', 'GET', null);
       // this.setState({friends: newState});
       // console.log(this.state.friends[0].location);
     });

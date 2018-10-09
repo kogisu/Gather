@@ -7,10 +7,17 @@ const places = require('../google/places');
 
 router.get('/', (req, res) => {
   console.log('query: ', req.query);
-
-  db.selectAll('Address', null, 'name coordinates')
+  let model, query;
+  if (req.query.friends) {
+    model = 'Address';
+    query = 'name coordinates';
+  } else {
+    model = 'Place';
+    query = null;
+  }
+  db.selectAll(model, null, query)
   .then((data) => {
-    res.status(201).json(data);
+    res.status(200).json(data);
   })
   .catch(err => {
     console.log('error occured in getting addresses from db: ', err);
