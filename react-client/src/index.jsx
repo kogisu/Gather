@@ -25,7 +25,8 @@ class App extends React.Component {
         }
       ],
       avgPoint: {},
-      searches: {}
+      searches: {},
+      distance: 5000
     }
     this.searchFriends = this.searchFriends.bind(this);
     this.searchPlaces = this.searchPlaces.bind(this);
@@ -148,7 +149,7 @@ class App extends React.Component {
         <hr/>      
         <div className={'Forms'} style={{position: 'relative', height: '50px'}}>
           <div className={'sorter'} style={{width: '250px', position: 'absolute', right: '10px', top: '5px'}}>
-            <PlacesSorter />
+            <PlacesSorter searchPlaces={this.searchPlaces}/>
           </div>
         </div>
         <hr/>

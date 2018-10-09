@@ -4,7 +4,7 @@ import Select from 'react-select';
 
 const options = [
   {value: 'default', label: 'Default'},
-  {value: 'ratings', label: 'Ratings'},
+  {value: 'rating', label: 'Rating'},
   {value: 'reviews', label: 'Reviews'},
   {value: 'price', label: 'Price'}
 ];
@@ -20,6 +20,7 @@ export default class PlacesSorter extends React.Component {
   handleChange(selectedOption) {
     this.setState({selectedOption});
     console.log('Option selected: ', selectedOption);
+    this.props.searchPlaces(`/find?places=1&distance=${this.props.distance}&sortby=${selectedOption.value}`, 'GET', null);
   }
 
   render() {

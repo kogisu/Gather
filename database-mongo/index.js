@@ -103,7 +103,7 @@ module.exports = {
       });
     });
   },
-  selectAll: function(model, queries, fields) {
+  selectAll: function(model, queries, fields, sortSelector) {
     queries = queries || {};
 
     return new Promise((resolve, reject) => {
@@ -116,12 +116,8 @@ module.exports = {
           }
         });
       } else {
-        Place.find(queries, fields, (err, items) => {
-          if(err) {
-            reject(err);
-          } else {
-            resolve(items);
-          }
+        Place.find(queries, fields).sort({[sortSelector]: 'desc'}).then(items => {
+          resolve(items);
         });
       }
     });

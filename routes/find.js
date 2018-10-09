@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
     model = 'Place';
     query = null;
   }
-  db.selectAll(model, null, query)
+  db.selectAll(model, null, query, req.query.sortby)
   .then((data) => {
     res.status(200).json(data);
   })
