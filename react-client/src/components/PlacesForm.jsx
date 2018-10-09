@@ -25,10 +25,10 @@ export default class FriendForm extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={{align: 'center'}}>
         <form onSubmit={this.handleSubmit}>
-          Places: <input type="text" name="places" value={this.state.places} onChange={this.handleChange}/>
-          <input type="submit" value="Search Places" />
+          <input type="text" name="places" value={this.state.places} onChange={this.handleChange}/>
+          <input type="submit" value="Find Places" />
         </form>
       </div>
     );

@@ -4,6 +4,7 @@ import $ from 'jquery';
 import Places from './components/Places.jsx';
 import FriendForm from './components/FriendForm.jsx';
 import PlacesForm from './components/PlacesForm.jsx';
+import PlacesSorter from './components/PlacesSorter.jsx';
 import FriendsMapContainer from './FriendsMapContainer.jsx';
 import AvgPoint from './components/AvgPoint.jsx';
 import {calculateAvgPt} from '../../helpers/utils';
@@ -115,14 +116,34 @@ class App extends React.Component {
   }
 
   render () {
-    return (<div>
-      <h1>Item List</h1>
-      <FriendForm search={this.searchFriends}/><br/>
-      <FriendsMapContainer friends={this.state.friends} avgPoint={this.state.avgPoint}/><br/>
-      <AvgPoint avgPoint={this.state.avgPoint}/><br/>
-      <PlacesForm searchPlaces={this.searchPlaces} avgPoint={this.state.avgPoint}/><br/>
-      <Places places={this.state.places}/>
-    </div>)
+    return (
+      <div>
+        <div className={'header'} style={{'backgroundColor': '#007eff'}}>
+          <h1 style={{color: 'white'}}>Gather</h1>
+          <FriendForm search={this.searchFriends}/><br/>
+        </div>
+        <div className={'googleMap'}>
+          <FriendsMapContainer friends={this.state.friends} avgPoint={this.state.avgPoint}/><br/>
+          <AvgPoint avgPoint={this.state.avgPoint}/>
+          <hr/>
+        </div>
+        <div className={'placesHeader'} style={{position: 'relative', height: '80px', 'text-align': 'center'}}>
+          <span style={{'fontSize': '22px'}}>What's near the center?</span><br/>
+          <span style={{'line-height': '30px'}}>Enter type of place below</span><br/>
+          <PlacesForm searchPlaces={this.searchPlaces} avgPoint={this.state.avgPoint}/>
+        </div>
+        <hr/>      
+        <div className={'Forms'} style={{position: 'relative', height: '50px'}}>
+          <div className={'sorter'} style={{width: '250px', position: 'absolute', right: '10px', top: '5px'}}>
+            <PlacesSorter />
+          </div>
+        </div>
+        <hr/>
+        <div>
+          <Places places={this.state.places}/>
+        </div>
+      </div>
+    )
   }
 }
 
