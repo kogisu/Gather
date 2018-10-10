@@ -82,8 +82,7 @@ module.exports = {
             phone: pl.formatted_phone_number,
             icon: pl.icon,
             types: pl.types || [],
-            price: pl.price_level,
-            reviews: pl.reviews.length || 0
+            price: pl.price_level
           }
           if (pl.opening_hours) {
             PlaceObj.hours = {
@@ -95,6 +94,11 @@ module.exports = {
               open: '',
               weekday_hours: ''
             }
+          }
+          if (pl.reviews) {
+            PlaceObj.reviews = pl.reviews.length;
+          } else {
+            PlaceObj.reviews = 0;
           }
 
           Place.create(PlaceObj, (err, data) => {  
@@ -130,6 +134,11 @@ module.exports = {
         });
       }
     });
+  },
+  delete: function(model, next) {
+    if (model === 'Place') {
+      Place.deleteMany({}, next);
+    }
   }
 }
 

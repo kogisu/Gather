@@ -103,4 +103,11 @@ router.post('/', (req, res) => {
   }
 });
 
+router.delete('/', (req, res) => {
+  console.log('in delete!!')
+  db.delete('Place', () => {
+    res.end();
+  });
+});
+
 module.exports = router;

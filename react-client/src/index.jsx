@@ -8,6 +8,7 @@ import PlacesSorter from './components/PlacesSorter.jsx';
 import FriendsMapContainer from './FriendsMapContainer.jsx';
 import AvgPoint from './components/AvgPoint.jsx';
 import {calculateAvgPt} from '../../helpers/utils';
+import SearchesList from './components/SearchesList.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -31,6 +32,11 @@ class App extends React.Component {
     this.searchFriends = this.searchFriends.bind(this);
     this.searchPlaces = this.searchPlaces.bind(this);
     this.geoFindMe = this.geoFindMe.bind(this);
+    this.handleState = this.handleState.bind(this);
+  }
+  
+  componentWillMount() {
+    this.searchPlaces('/find?deletePlaces=1', 'DELETE', null);
   }
 
   componentDidMount() {
@@ -101,6 +107,10 @@ class App extends React.Component {
     });
   }
 
+  handleState(prop, newState) {
+    this.setState({[prop]: newState});
+  }
+
   searchPlaces(url, method, data) {
     url = url || '/find';
     // console.log('data', data);
@@ -118,10 +128,13 @@ class App extends React.Component {
           let newSearches = this.state.searches;
           newSearches[data.places] = 1;
           this.setState({places: results, searches: newSearches});
-        } else {
+        }
+        if (method === 'GET') {
           this.setState({places: results});
         }
-        console.log('searches: ', this.state.searches);
+        if (method === 'DELETE') {
+          this.setState({places: []});
+        }
       },
       error: (err) => {
         console.log('err', err);
@@ -144,10 +157,11 @@ class App extends React.Component {
         <div className={'placesHeader'} style={{position: 'relative', height: '80px', 'text-align': 'center'}}>
           <span style={{'fontSize': '22px'}}>What's near the center?</span><br/>
           <span style={{'line-height': '30px'}}>Enter type of place below</span><br/>
-          <PlacesForm searchPlaces={this.searchPlaces} avgPoint={this.state.avgPoint}/>
+          <PlacesForm searchPlaces={this.searchPlaces} searches={this.state.searches} avgPoint={this.state.avgPoint} handleState={this.handleState}/>
         </div>
         <hr/>      
         <div className={'Forms'} style={{position: 'relative', height: '50px'}}>
+          <SearchesList searches={this.state.searches}/>
           <div className={'sorter'} style={{width: '250px', position: 'absolute', right: '10px', top: '5px'}}>
             <PlacesSorter searchPlaces={this.searchPlaces}/>
           </div>

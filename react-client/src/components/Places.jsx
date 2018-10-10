@@ -3,7 +3,7 @@ import Place from './Place.jsx';
 
 const Places = (props) => (
   <div>
-    <h4> List Component </h4>
+    <h4> Places </h4>
     There are { props.places.length } places.
     { 
       props.places.map((place, index) => {

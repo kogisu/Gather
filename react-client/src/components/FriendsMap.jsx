@@ -1,5 +1,5 @@
 import React from 'react';
-import { withScriptjs, withGoogleMap, GoogleMap } from "react-google-maps";
+import { withScriptjs, withGoogleMap, GoogleMap, Rectangle } from "react-google-maps";
 import FriendMarker from './FriendMarker.jsx';
 import PropTypes from 'prop-types';
 
@@ -10,6 +10,7 @@ const FriendsMap = withScriptjs(withGoogleMap((props) => {
   });
   console.log(props.avgPoint);
   markers.push(<FriendMarker key={'avgPoint'} location={props.avgPoint.lat ? {lat: props.avgPoint.lat, lng: props.avgPoint.lng} : {lat: 0, lng: 0}}/>);
+  // markers.push(<FriendMarker key={'centerPoint'} location={Rectangle.getBounds().getCenter()} />)
   return (
     <div>
       <GoogleMap 
