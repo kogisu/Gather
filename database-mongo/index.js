@@ -137,9 +137,13 @@ module.exports = {
       }
     });
   },
-  delete: function(model, next) {
+  delete: function(model, searchString, next) {
     if (model === 'Place') {
-      Place.deleteMany({}, next);
+      let query = searchString ? {search: searchString} : {};
+      console.log('query inside delete func: ', query);
+      console.log(typeof query);
+      console.log(typeof searchString);
+      Place.deleteMany(query, next);
     }
   }
 }

@@ -133,7 +133,7 @@ class App extends React.Component {
           this.setState({places: results});
         }
         if (method === 'DELETE') {
-          this.setState({places: []});
+          this.setState({places: results});
         }
       },
       error: (err) => {

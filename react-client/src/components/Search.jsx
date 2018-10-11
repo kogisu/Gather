@@ -4,10 +4,9 @@ const Search = (props) => {
   
   const handleDelete = props => {
     console.log('deleting!!');
-    console.log('props: ', props);
-    props.searchPlaces(`/find?deletePlaces=${props.search}`, 'DELETE', null);
-
     let newSearches = props.searches;
+
+    props.searchPlaces(`/find?deletePlaces=${props.search}`, 'DELETE', null);
     delete newSearches[props.search];
     props.handleState('searches', newSearches);
   }
