@@ -92,7 +92,7 @@ router.post('/', (req, res) => {
     places(searchString, distance, coordinates)
     .then(places => {
       // console.log('results: ', places.results);
-      return db.savePlace(places.results);
+      return db.savePlace(places.results, searchString);
     })
     .then(() => {
       db.selectAll('Place', null, null)

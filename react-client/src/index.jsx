@@ -36,7 +36,7 @@ class App extends React.Component {
   }
   
   componentWillMount() {
-    this.searchPlaces('/find?deletePlaces=1', 'DELETE', null);
+    this.searchPlaces('/find?deletePlaces=all', 'DELETE', null);
   }
 
   componentDidMount() {
@@ -154,17 +154,17 @@ class App extends React.Component {
           <AvgPoint avgPoint={this.state.avgPoint}/>
           <hr/>
         </div>
-        <div className={'placesHeader'} style={{position: 'relative', height: '80px', 'text-align': 'center'}}>
+        <div className={'placesHeader'} style={{position: 'relative', height: '80px', 'textAlign': 'center'}}>
           <span style={{'fontSize': '22px'}}>What's near the center?</span><br/>
-          <span style={{'line-height': '30px'}}>Enter type of place below</span><br/>
+          <span style={{'lineHeight': '30px'}}>Enter type of place below</span><br/>
           <PlacesForm searchPlaces={this.searchPlaces} searches={this.state.searches} avgPoint={this.state.avgPoint} handleState={this.handleState}/>
         </div>
-        <hr/>      
-        <div className={'Forms'} style={{position: 'relative', height: '50px'}}>
-          <SearchesList searches={this.state.searches}/>
-          <div className={'sorter'} style={{width: '250px', position: 'absolute', right: '10px', top: '5px'}}>
+        {/* <hr/>       */}
+        <div className={'Forms'}>
+          <SearchesList searches={this.state.searches} searchPlaces={this.searchPlaces} handleState={this.handleState}/>
+          {/* <div className={'sorter'} style={{width: '250px', position: 'absolute', right: '10px', top: '5px'}}>
             <PlacesSorter searchPlaces={this.searchPlaces}/>
-          </div>
+          </div> */}
         </div>
         <hr/>
         <div>
