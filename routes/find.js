@@ -15,6 +15,7 @@ router.get('/', (req, res) => {
     model = 'Place';
     query = null;
   }
+  query = req.query.distance ? {distance: {$gt: req.query.distance}} : null;
   db.selectAll(model, null, query, req.query.sortby)
   .then((data) => {
     res.status(200).json(data);
@@ -86,7 +87,7 @@ router.post('/', (req, res) => {
   } else if (req.query.places) {
     console.log('places search:', req.body);
     let searchString = req.body.places;
-    let distance = 5000; //meters
+    let distance = 50000; //meters
     let coordinates = req.body.avgPoint;
 
     places(searchString, distance, coordinates)

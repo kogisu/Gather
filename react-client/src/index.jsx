@@ -9,6 +9,7 @@ import FriendsMapContainer from './FriendsMapContainer.jsx';
 import AvgPoint from './components/AvgPoint.jsx';
 import {calculateAvgPt} from '../../helpers/utils';
 import SearchesList from './components/SearchesList.jsx';
+import DistanceSlider from './components/DistanceSlider.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -162,13 +163,20 @@ class App extends React.Component {
         {/* <hr/>       */}
         <div className={'Forms'} style={{height: '60px'}}>
           <SearchesList searches={this.state.searches} searchPlaces={this.searchPlaces} handleState={this.handleState}/>
-          <div className={'sorter'} style={{width: '250px', float: 'right', 'margin-right': '20px'}}>
+          <div className={'sorter'} style={{width: '250px', float: 'right', 'marginRight': '20px'}}>
             <PlacesSorter searchPlaces={this.searchPlaces}/>
           </div>
         </div>
         <hr/>
         <div>
-          <Places places={this.state.places}/>
+          <div className={'filterBar'} style={{width: '200px', height: '100%', 'text-align': 'center', float: 'left'}}>
+            <span style={{'lineHeight': '25px'}}><strong>Filters</strong></span><br/>
+            <span>Set Distance</span>
+              <DistanceSlider searchPlaces={this.searchPlaces}/>
+          </div>
+          <div className={'places'} style={{'marginLeft': '300px', width: '100%'}}>
+            <Places places={this.state.places}/>
+          </div>
         </div>
       </div>
     )

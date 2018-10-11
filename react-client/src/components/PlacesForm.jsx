@@ -21,7 +21,7 @@ export default class FriendForm extends React.Component {
     console.log('props: ', this.props);
     e.preventDefault();
     let newSearches = this.props.searches;
-    this.props.searchPlaces('/find?places=1', 'POST', {places: this.state.places, avgPoint: this.props.avgPoint});
+    this.props.searchPlaces('/find?places=all', 'POST', {places: this.state.places, avgPoint: this.props.avgPoint});
     newSearches[this.state.places] = 1;
     this.props.handleState('searches', newSearches);
     

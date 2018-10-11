@@ -7,7 +7,7 @@ export default class FriendMarker extends React.Component {
   render(){
     return(
       <div>
-        <Marker position={this.props.location} />
+        <Marker position={this.props.location} label={this.props.name}/>
       </div>
     );
   }
