@@ -7,7 +7,7 @@ import PlacesForm from './components/PlacesForm.jsx';
 import PlacesSorter from './components/PlacesSorter.jsx';
 import FriendsMapContainer from './FriendsMapContainer.jsx';
 import AvgPoint from './components/AvgPoint.jsx';
-import {calculateAvgPt} from '../../helpers/utils';
+import {calculateCenterPt} from '../../helpers/utils';
 import SearchesList from './components/SearchesList.jsx';
 import DistanceSlider from './components/DistanceSlider.jsx';
 
@@ -98,7 +98,7 @@ class App extends React.Component {
         } else if (data.fail === 1) {
           alert('Entered Address Produces more than one result.  Please try again');
         } else {
-          let avgPoint = calculateAvgPt(data);
+          let avgPoint = calculateCenterPt(data);
           this.setState({friends: data, avgPoint: avgPoint});
         }
       },
