@@ -160,11 +160,11 @@ class App extends React.Component {
           <PlacesForm searchPlaces={this.searchPlaces} searches={this.state.searches} avgPoint={this.state.avgPoint} handleState={this.handleState}/>
         </div>
         {/* <hr/>       */}
-        <div className={'Forms'}>
+        <div className={'Forms'} style={{height: '60px'}}>
           <SearchesList searches={this.state.searches} searchPlaces={this.searchPlaces} handleState={this.handleState}/>
-          {/* <div className={'sorter'} style={{width: '250px', position: 'absolute', right: '10px', top: '5px'}}>
+          <div className={'sorter'} style={{width: '250px', float: 'right', 'margin-right': '20px'}}>
             <PlacesSorter searchPlaces={this.searchPlaces}/>
-          </div> */}
+          </div>
         </div>
         <hr/>
         <div>

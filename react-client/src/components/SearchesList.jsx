@@ -3,7 +3,7 @@ import Search from './Search.jsx';
 
 const SearchesList = (props) => {
   return (
-    <div className={'searchesList'} style={{height: '60px'}}>
+    <div className={'searchesList'} style={{display: 'inLine'}}>
       {
         Object.keys(props.searches).length > 0 ? (
           Object.keys(props.searches).map(search => {
