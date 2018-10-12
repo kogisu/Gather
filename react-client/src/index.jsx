@@ -152,7 +152,7 @@ class App extends React.Component {
         </div>
         <div className={'googleMap'}>
           <FriendsMapContainer friends={this.state.friends} avgPoint={this.state.avgPoint}/><br/>
-          <AvgPoint avgPoint={this.state.avgPoint}/>
+          <AvgPoint avgPoint={this.state.avgPoint} friends={this.state.friends}/>
           <hr/>
         </div>
         <div className={'placesHeader'} style={{position: 'relative', height: '80px', 'textAlign': 'center'}}>
