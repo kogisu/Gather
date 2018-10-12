@@ -106,14 +106,23 @@ router.post('/', (req, res) => {
 
 router.delete('/', (req, res) => {
   console.log('in delete!!');
-  let query = req.query.deletePlaces === 'all' ? null : req.query.deletePlaces; 
+  let query;
+  if (req.query.deletePlaces === 'all') {
+    model = 'Place';
+    query = null;
+  } else if (req.query.deleteFriends === 'all') {
+    model = 'Address';
+    query = null;
+  } else {
+    query = req.query.deletePlaces
+  }
   console.log('query: ', query);
-  db.delete('Place', query, () => {
+  db.delete(model, query, () => {
     console.log('selecting after delete');
-    db.selectAll('Place', null, null)
-    .then(places => {
-      console.log(places);
-      res.status(202).json(places);
+    db.selectAll(model, null, null)
+    .then(collection => {
+      console.log(collection);
+      res.status(202).json(collection);
     })
   });
 });

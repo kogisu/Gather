@@ -138,12 +138,15 @@ module.exports = {
     });
   },
   delete: function(model, searchString, next) {
+    let query = searchString ? {search: searchString} : {};
     if (model === 'Place') {
-      let query = searchString ? {search: searchString} : {};
       console.log('query inside delete func: ', query);
       console.log(typeof query);
       console.log(typeof searchString);
       Place.deleteMany(query, next);
+    }
+    if (model === 'Address') {
+      Address.deleteMany(query, next);
     }
   }
 }

@@ -20,7 +20,7 @@ export default class PlacesSorter extends React.Component {
   handleChange(selectedOption) {
     this.setState({selectedOption});
     console.log('Option selected: ', selectedOption);
-    this.props.searchPlaces(`/find?places=1&distance=${this.props.distance}&sortby=${selectedOption.value}`, 'GET', null);
+    this.props.searchPlaces(`/find?places=1&distance=${50000}&sortby=${selectedOption.value}`, 'GET', null);
   }
 
   render() {

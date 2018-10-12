@@ -171,8 +171,10 @@ class App extends React.Component {
         <div>
           <div className={'filterBar'} style={{width: '200px', height: '100%', 'text-align': 'center', float: 'left'}}>
             <span style={{'lineHeight': '25px'}}><strong>Filters</strong></span><br/>
-            <span>Set Distance</span>
-              <DistanceSlider searchPlaces={this.searchPlaces}/>
+            <span>Set Distance [WIP]</span>
+            <DistanceSlider searchPlaces={this.searchPlaces}/>
+            <span style={{'lineHeight': '50px'}}>Filter by ratings [WIP]</span><br/>
+            <span style={{'lineHeight': '50px'}}>Filter by price [WIP]</span><br/>
           </div>
           <div className={'places'} style={{'marginLeft': '300px', width: '100%'}}>
             <Places places={this.state.places}/>
