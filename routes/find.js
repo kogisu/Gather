@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
     model = 'Place';
     query = null;
   }
-  query = req.query.distance ? {distance: {$gt: req.query.distance}} : null;
+  // query = req.query.distance ? {distance: {$lt: req.query.distance}} : null;
   db.selectAll(model, null, query, req.query.sortby)
   .then((data) => {
     res.status(200).json(data);
