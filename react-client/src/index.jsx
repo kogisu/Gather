@@ -17,14 +17,7 @@ class App extends React.Component {
     this.state = { 
       places: [],
       friends: [
-        {
-          _id: 0,
-          name: 'kento',
-          coordinates: {
-            lat: 41.3781152,
-            lng: -72.9173237
-          }
-        }
+
       ],
       avgPoint: {},
       searches: {},
@@ -145,7 +138,7 @@ class App extends React.Component {
 
   render () {
     return (
-      <div>
+      <div style={{'font-family': 'Roboto,Arial,Helvetica,sans-serif'}}>
         <div className={'header'} style={{'backgroundColor': '#007eff'}}>
           <h1 style={{color: 'white'}}>Gather</h1>
           <FriendForm search={this.searchFriends}/><br/>

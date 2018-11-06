@@ -37,12 +37,12 @@ export default class FriendForm extends React.Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit} >
+        <form onSubmit={this.handleSubmit} style={{display: 'inline-block'}}>
           Name: <input type="text" name="name" value={this.state.name} onChange={this.handleChange}/>
           Address: <input type="text" name="address" value={this.state.address} onChange={this.handleChange}/>
           <input name="gatherFriend" type="submit" value="Gather Friend" />
         </form>
-        <form onSubmit={this.handleClear} >
+        <form onSubmit={this.handleClear} style={{display: 'inline-block'}}>
           <input name="clearFriends" type="submit" value="Clear Friends" />
         </form>
       </div>
