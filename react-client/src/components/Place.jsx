@@ -3,7 +3,7 @@ import styles from '../styles/styles.css';
 
 const Place = (props) => {
   return (
-    <a href={props.place.website ? props.place.website : props.place.url} style={{'text-decoration': 'none', color: 'black'}}>
+    <a href={props.place.website ? props.place.website : props.place.url} style={{'textDecoration': 'none', color: 'black'}}>
     <div>
       <span>{props.place.name}</span><br/>
       <span>{props.place.types.length <= 2 ? props.place.types.join(', ') : props.place.types.slice(0,2).join(', ') + '..'}</span><br/>

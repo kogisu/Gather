@@ -87,7 +87,7 @@ router.post('/', (req, res) => {
   } else if (req.query.places) {
     console.log('places search:', req.body);
     let searchString = req.body.places;
-    let distance = 50000; //meters
+    let distance = req.query.distance || 50000; //meters
     let coordinates = req.body.avgPoint;
 
     places(searchString, distance, coordinates)

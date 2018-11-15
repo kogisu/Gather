@@ -138,7 +138,7 @@ class App extends React.Component {
 
   render () {
     return (
-      <div style={{'font-family': 'Roboto,Arial,Helvetica,sans-serif'}}>
+      <div style={{'fontFamily': 'Roboto,Arial,Helvetica,sans-serif'}}>
         <div className={'header'} style={{'backgroundColor': '#007eff'}}>
           <h1 style={{color: 'white'}}>Gather</h1>
           <FriendForm search={this.searchFriends}/><br/>
@@ -162,7 +162,7 @@ class App extends React.Component {
         </div>
         <hr/>
         <div>
-          <div className={'filterBar'} style={{width: '200px', height: '100%', 'text-align': 'center', float: 'left'}}>
+          <div className={'filterBar'} style={{width: '200px', height: '100%', 'textAlign': 'center', float: 'left'}}>
             <span style={{'lineHeight': '25px'}}><strong>Filters</strong></span><br/>
             <span>Set Distance [WIP]</span>
             <DistanceSlider searchPlaces={this.searchPlaces}/>
