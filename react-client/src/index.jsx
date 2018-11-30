@@ -10,6 +10,7 @@ import AvgPoint from './components/AvgPoint.jsx';
 import {calculateCenterPt} from '../../helpers/utils';
 import SearchesList from './components/SearchesList.jsx';
 import DistanceSlider from './components/DistanceSlider.jsx';
+import styles from './styles/styles.css';
 
 class App extends React.Component {
   constructor(props) {
@@ -138,8 +139,8 @@ class App extends React.Component {
 
   render () {
     return (
-      <div style={{'fontFamily': 'Roboto,Arial,Helvetica,sans-serif'}}>
-        <div className={'header'} style={{'backgroundColor': '#007eff'}}>
+      <div className={styles.appWrapper}>
+        <div className={styles.header}>
           <h1 style={{color: 'white'}}>Gather</h1>
           <FriendForm search={this.searchFriends}/><br/>
         </div>
