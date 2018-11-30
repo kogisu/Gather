@@ -1,7 +1,26 @@
 import React from 'react';
-import Slider from 'react-rangeslider';
+import 'rc-slider/assets/index.css';
+import Slider from 'rc-slider';
+import Tooltip from 'rc-tooltip';
 import 'react-rangeslider/lib/index.css';
 const debounce = require('lodash.debounce');
+
+const Handle = Slider.Handle;
+
+const handle = (props) => {
+  const { value, dragging, index, ...restProps } = props;
+  return (
+    <Tooltip
+      prefixCls="rc-slider-tooltip"
+      overlay={value}
+      visible={dragging}
+      placement="top"
+      key={index}
+    >
+      <Handle value={value} {...restProps} />
+    </Tooltip>
+  );
+};
 
 export default class DistanceSlider extends React.Component {
   constructor(props) {
@@ -28,15 +47,18 @@ export default class DistanceSlider extends React.Component {
 
   render() {
     let { distance } = this.state
+    const Handle = Slider.Handle;
     return (
-      <Slider
-        value={distance}
-        min={0}
-        max={31}
-        step={1}
-        orientation="horizontal"
-        onChange={this.handleChange}
-      />
+      <div style={{ width: 600, margin: 50 }}>
+        <Slider
+          min={0}
+          max={31}
+          step={1}
+          vertical={false}
+          onChange={this.handleChange}
+          handle={handle}
+        />
+      </div>
     )
   }
 }

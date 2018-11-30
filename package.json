@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "angular": "^1.6.3",
+    "babel-preset-stage-2": "^6.24.1",
     "body-parser": "^1.17.2",
     "express": "^4.15.0",
     "googleapis": "^34.0.0",
@@ -28,6 +29,7 @@
     "mongoose": "^4.8.6",
     "morgan": "^1.9.1",
     "mysql": "^2.13.0",
+    "rc-slider": "^8.6.3",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-google-maps": "^9.4.5",

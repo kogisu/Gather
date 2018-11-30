@@ -1,6 +1,6 @@
 const details = require('../google/details');
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect('mongodb://localhost/test', {useMongoClient: true});
 
 const db = mongoose.connection;
 
