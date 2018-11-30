@@ -49,7 +49,7 @@ export default class DistanceSlider extends React.Component {
     let { distance } = this.state
     const Handle = Slider.Handle;
     return (
-      <div style={{ width: 600, margin: 50 }}>
+      <div style={{ width: 200, margin: 50 }}>
         <Slider
           min={0}
           max={31}
