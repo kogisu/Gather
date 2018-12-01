@@ -10,6 +10,7 @@ import AvgPoint from './components/AvgPoint.jsx';
 import {calculateCenterPt} from '../../helpers/utils';
 import SearchesList from './components/SearchesList.jsx';
 import DistanceSlider from './components/DistanceSlider.jsx';
+import Rating from './components/StarRating.jsx';
 import styles from './styles/styles.css';
 
 class App extends React.Component {
@@ -184,7 +185,8 @@ class App extends React.Component {
             <span style={{'lineHeight': '25px'}}><strong>Filters</strong></span><br/>
             <span>Set Distance in Miles</span>
             <DistanceSlider searchPlaces={this.searchPlaces}/>
-            <span style={{'lineHeight': '50px'}}>Filter by ratings [WIP]</span><br/>
+            <span style={{'lineHeight': '50px'}}>Filter by ratings</span>
+            <Rating />
           </div>
           <div className={styles.places}>
             <Places places={this.state.places}/>
