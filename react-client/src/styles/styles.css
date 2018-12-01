@@ -143,6 +143,13 @@ input[type=submit] {
   margin: 5px;
 }
 
+.hoverOn {
+  background: lightblue;
+}
+
+.hoverOff {
+  background: white;
+}
 .line {
   display: grid;
   grid-template-columns: 500px 1fr;
