@@ -139,38 +139,54 @@ class App extends React.Component {
 
   render () {
     return (
-      <div className={styles.appWrapper}>
-        <div className={styles.header}>
-          <h1 style={{color: 'white'}}>Gather</h1>
-          <FriendForm search={this.searchFriends}/><br/>
+      <div className={styles.container}>
+        <div className={styles.headerBar}>
+          <div className={styles.title}>Gather</div>
+          <FriendForm 
+            search={this.searchFriends}/>
         </div>
-        <div className={'googleMap'}>
-          <FriendsMapContainer friends={this.state.friends} avgPoint={this.state.avgPoint}/><br/>
-          <AvgPoint avgPoint={this.state.avgPoint} friends={this.state.friends}/>
+        <div className={styles.googleMap}>
+          <FriendsMapContainer 
+            friends={this.state.friends} 
+            avgPoint={this.state.avgPoint}
+          />
+        </div>
+        <div className={styles.avgPoint}>
+          <AvgPoint 
+            avgPoint={this.state.avgPoint} 
+            friends={this.state.friends}
+          />
           <hr/>
         </div>
-        <div className={'placesHeader'} style={{position: 'relative', height: '80px', 'textAlign': 'center'}}>
-          <span style={{'fontSize': '22px'}}>What's near the center?</span><br/>
-          <span style={{'lineHeight': '30px'}}>Enter type of place below</span><br/>
-          <PlacesForm searchPlaces={this.searchPlaces} searches={this.state.searches} avgPoint={this.state.avgPoint} handleState={this.handleState}/>
+        <div className={styles.placesHeader}>
+          <div className={styles.findStatementOne}>What's near the center?</div>
+          <div className={styles.findStatementTwo}>Enter type of place below</div>
+          <PlacesForm 
+            searchPlaces={this.searchPlaces} 
+            searches={this.state.searches} 
+            avgPoint={this.state.avgPoint} 
+            handleState={this.handleState}
+          />
+          <hr/>
         </div>
-        {/* <hr/>       */}
-        <div className={'Forms'} style={{height: '60px'}}>
-          <SearchesList searches={this.state.searches} searchPlaces={this.searchPlaces} handleState={this.handleState}/>
-          <div className={'sorter'} style={{width: '250px', float: 'right', 'marginRight': '20px'}}>
+        <div className={styles.searchList}>
+          <SearchesList 
+            searches={this.state.searches} 
+            searchPlaces={this.searchPlaces} 
+            handleState={this.handleState}
+          />
+          <div className={styles.sorter}>
             <PlacesSorter searchPlaces={this.searchPlaces}/>
           </div>
         </div>
-        <hr/>
-        <div>
-          <div className={'filterBar'} style={{width: '200px', height: '100%', 'textAlign': 'center', float: 'left'}}>
+        <div className={styles.placesSection}>
+          <div className={styles.filterBar}>
             <span style={{'lineHeight': '25px'}}><strong>Filters</strong></span><br/>
-            <span>Set Distance [WIP]</span>
+            <span>Set Distance in Miles</span>
             <DistanceSlider searchPlaces={this.searchPlaces}/>
             <span style={{'lineHeight': '50px'}}>Filter by ratings [WIP]</span><br/>
-            <span style={{'lineHeight': '50px'}}>Filter by price [WIP]</span><br/>
           </div>
-          <div className={'places'} style={{'marginLeft': '300px', width: '100%'}}>
+          <div className={styles.places}>
             <Places places={this.state.places}/>
           </div>
         </div>

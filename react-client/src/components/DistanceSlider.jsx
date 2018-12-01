@@ -1,8 +1,10 @@
 import React from 'react';
-import 'rc-slider/assets/index.css';
+// import 'rc-slider/assets/index.css';
+import '!style-loader!css-loader!rc-slider/assets/index.css'; 
 import Slider from 'rc-slider';
 import Tooltip from 'rc-tooltip';
 import 'react-rangeslider/lib/index.css';
+import styles from '../styles/styles.css'
 const debounce = require('lodash.debounce');
 
 const Handle = Slider.Handle;
@@ -49,7 +51,7 @@ export default class DistanceSlider extends React.Component {
     let { distance } = this.state
     const Handle = Slider.Handle;
     return (
-      <div style={{ width: 200, margin: 50 }}>
+      <div className={styles.slider}>
         <Slider
           min={0}
           max={31}

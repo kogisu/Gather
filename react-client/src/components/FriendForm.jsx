@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from '../styles/styles.css'
 
 export default class FriendForm extends React.Component {
   constructor(props) {
@@ -36,14 +37,18 @@ export default class FriendForm extends React.Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit} style={{display: 'inline-block'}}>
-          Name: <input type="text" name="name" value={this.state.name} onChange={this.handleChange}/>
-          Address: <input type="text" name="address" value={this.state.address} onChange={this.handleChange}/>
+      <div className={styles.friendForm}>
+        <form onSubmit={this.handleSubmit}>
+          <div className={styles.nameForm}>
+            Name: <input className={styles.name}type="text" name="name" value={this.state.name} onChange={this.handleChange}/>
+          </div>
+          <div className={styles.addressForm}>
+            Address: <input className={styles.address} type="text" name="address" value={this.state.address} onChange={this.handleChange}/>
+          </div>
           <input name="gatherFriend" type="submit" value="Gather Friend" />
         </form>
-        <form onSubmit={this.handleClear} style={{display: 'inline-block'}}>
-          <input name="clearFriends" type="submit" value="Clear Friends" />
+        <form onSubmit={this.handleClear}>
+          <input className={styles.clearFriends} name="clearFriends" type="submit" value="Clear Friends" />
         </form>
       </div>
     );
