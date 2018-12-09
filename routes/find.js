@@ -6,23 +6,23 @@ const {google} = require('googleapis');
 const places = require('../google/places');
 
 router.get('/', (req, res) => {
-  console.log('query: ', req.query);
   let model, query;
   if (req.query.friends) {
     model = 'Address';
-    query = 'name coordinates';
+    fields = 'name coordinates';
   } else {
     model = 'Place';
-    query = null;
+    fields = null;
   }
-  if (req.query.distance || req.query.ratings) {
+  if (req.query.distance || req.query.rating) {
     query = {
-      distance: {$lte: req.query.distance || 50000},
-      ratings: {$lte: req.query.rating || 5}
+      // distance: {$lte: req.query.distance * 1609.34 || 50000},
+      rating: {$lte: req.query.rating || 5}
     };
   }
-  db.selectAll(model, null, query, req.query.sortby)
+  db.selectAll(model, query, fields, req.query.sortby)
   .then((data) => {
+    console.log('data: ', data);
     res.status(200).json(data);
   })
   .catch(err => {

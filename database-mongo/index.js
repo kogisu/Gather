@@ -133,6 +133,7 @@ module.exports = {
         });
       } else {
         Place.find(queries, fields).sort({[sortSelector]: 'desc'}).then(items => {
+          // console.log('items: ', items);
           resolve(items);
         });
       }

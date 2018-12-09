@@ -178,7 +178,11 @@ class App extends React.Component {
             handleState={this.handleState}
           />
           <div className={styles.sorter}>
-            <PlacesSorter searchPlaces={this.searchPlaces}/>
+            <PlacesSorter 
+              searchPlaces={this.searchPlaces}
+              distance={this.state.distance}
+              rating={this.state.rating}
+            />
           </div>
         </div>
         <div className={styles.placesSection}>
