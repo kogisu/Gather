@@ -27,7 +27,7 @@ class Place extends React.Component {
         className={hover}
       >
       <div>
-        <div className={styles.place + hover}>
+        <div className={styles.place}>
         <div>
           <span>{this.props.place.name}</span><br/>
           <span>{this.props.place.types.length <= 2 ? this.props.place.types.join(', ') : this.props.place.types.slice(0,2).join(', ') + '..'}</span>

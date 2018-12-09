@@ -3,8 +3,8 @@ import Place from './Place.jsx';
 
 const Places = (props) => (
   <div>
-    <h4> Places </h4>
-    <span>There are { props.places.length } places</span>
+    <h3> Places </h3>
+    <div><b>There are { props.places.length } places</b></div><br/>
     { 
       props.places.map((place, index) => {
         return <Place key={index} place={place}/>

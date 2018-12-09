@@ -187,7 +187,7 @@ class App extends React.Component {
         </div>
         <div className={styles.placesSection}>
           <div className={styles.filterBar}>
-            <span style={{'lineHeight': '25px'}}><strong>Filters</strong></span><br/>
+            <span style={{'lineHeight': '25px', 'fontSize': '18px'}}><strong>Filters</strong></span><br/>
             <span>Set Distance in Miles</span>
             <DistanceSlider searchPlaces={this.searchPlaces} handleState ={this.handleState} distance={this.state.distance} rating={this.state.rating}/>
             <span style={{'lineHeight': '50px'}}>Filter by ratings</span>
