@@ -73,6 +73,7 @@ module.exports = {
         // if (index === 0) {console.log('place: ', place); }
         details(place.place_id)
         .then(place => {
+          console.log('place: ', place);
           let pl = place.result;
           let PlaceObj = {
             name: pl.name,

@@ -28,7 +28,6 @@ export default class DistanceSlider extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      distance: 1
     }
     this.handleSearch = this.handleSearch.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -36,20 +35,18 @@ export default class DistanceSlider extends React.Component {
   }
 
   handleSearch() {
-      this.props.searchPlaces(`/find?places=all&distance=${this.state.distance}`, 'GET', null);
+      this.props.searchPlaces(`/find?places=all&distance=${this.props.distance}&rating=${this.props.rating}`, 'GET', null);
   }
-  handleChange(value) {
-    // console.log('value: ', value);
-    this.setState({
-      distance: value
-    }, (value) => {
-      this.handleSearchDebounced(value);
+  handleChange(value, self, props) {
+    props.handleState('distance', value, () => {
+      self.handleSearchDebounced(value);
     });
   }
 
   render() {
     let { distance } = this.state
     const Handle = Slider.Handle;
+    let props = this.props;
     return (
       <div className={styles.slider}>
         <Slider
@@ -57,7 +54,7 @@ export default class DistanceSlider extends React.Component {
           max={31}
           step={1}
           vertical={false}
-          onChange={this.handleChange}
+          onChange={(value) => this.handleChange(value, this, props)}
           handle={handle}
         />
       </div>

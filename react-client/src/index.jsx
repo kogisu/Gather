@@ -10,7 +10,7 @@ import AvgPoint from './components/AvgPoint.jsx';
 import {calculateCenterPt} from '../../helpers/utils';
 import SearchesList from './components/SearchesList.jsx';
 import DistanceSlider from './components/DistanceSlider.jsx';
-import Rating from './components/StarRating.jsx';
+import StarRating from './components/StarRating.jsx';
 import styles from './styles/styles.css';
 
 class App extends React.Component {
@@ -23,7 +23,8 @@ class App extends React.Component {
       ],
       avgPoint: {},
       searches: {},
-      distance: 5000
+      distance: 1,
+      rating: 5
     }
     this.searchFriends = this.searchFriends.bind(this);
     this.searchPlaces = this.searchPlaces.bind(this);
@@ -103,8 +104,8 @@ class App extends React.Component {
     });
   }
 
-  handleState(prop, newState) {
-    this.setState({[prop]: newState});
+  handleState(prop, newState, callback) {
+    this.setState({[prop]: newState}, callback);
   }
 
   searchPlaces(url, method, data) {
@@ -184,9 +185,9 @@ class App extends React.Component {
           <div className={styles.filterBar}>
             <span style={{'lineHeight': '25px'}}><strong>Filters</strong></span><br/>
             <span>Set Distance in Miles</span>
-            <DistanceSlider searchPlaces={this.searchPlaces}/>
+            <DistanceSlider searchPlaces={this.searchPlaces} handleState ={this.handleState} distance={this.state.distance} rating={this.state.rating}/>
             <span style={{'lineHeight': '50px'}}>Filter by ratings</span>
-            <Rating />
+            <StarRating searchPlaces={this.searchPlaces} handleState={this.handleState} distance={this.state.distance} rating={this.state.rating}/>
           </div>
           <div className={styles.places}>
             <Places places={this.state.places}/>

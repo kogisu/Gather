@@ -8,7 +8,7 @@ const FriendsMap = withScriptjs(withGoogleMap((props) => {
   const markers = props.friends.map(friend => {
     return <FriendMarker key={friend._id} name={friend.name} location={{lat: friend.coordinates.lat, lng: friend.coordinates.lng}} />
   });
-  console.log(props.avgPoint);
+  // console.log(props.avgPoint);
   markers.push(<FriendMarker key={'avgPoint'} name={'Gather Here'} location={props.avgPoint.lat ? {lat: props.avgPoint.lat, lng: props.avgPoint.lng} : {lat: 0, lng: 0}}/>);
   // markers.push(<FriendMarker key={'centerPoint'} location={Rectangle.getBounds().getCenter()} />)
   return (

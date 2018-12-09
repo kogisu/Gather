@@ -5,16 +5,18 @@ class Rating extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      rating: 5
     }
   }
 
-  onStarClick(nextValue, prevValue, name) {
-    this.setState({rating: nextValue});
+  onStarClick(value, props) {
+    props.handleState('rating', value, () => {
+      props.searchPlaces(`/find?places=all&distance=${this.props.distance}&rating=${this.props.rating}`, 'GET', null);
+    });
+    
   }
  
   render() {
-    const { rating } = this.state;
+    const rating = this.props.rating;
     
     return (                
       <div className={StyleSheet.ratings}>
@@ -24,7 +26,7 @@ class Rating extends React.Component {
           emptyStarColor={'grey'}
           starCount={5}
           value={rating}
-          onStarClick={this.onStarClick.bind(this)}
+          onStarClick={(value) => this.onStarClick(value, this.props)}
         />
       </div>
     );

@@ -15,7 +15,12 @@ router.get('/', (req, res) => {
     model = 'Place';
     query = null;
   }
-  // query = req.query.distance ? {distance: {$lt: req.query.distance}} : null;
+  if (req.query.distance || req.query.ratings) {
+    query = {
+      distance: {$lte: req.query.distance || 50000},
+      ratings: {$lte: req.query.rating || 5}
+    };
+  }
   db.selectAll(model, null, query, req.query.sortby)
   .then((data) => {
     res.status(200).json(data);
@@ -85,14 +90,14 @@ router.post('/', (req, res) => {
       }
     });
   } else if (req.query.places) {
-    console.log('places search:', req.body);
+    // console.log('places search:', req.body);
     let searchString = req.body.places;
     let distance = req.query.distance || 50000; //meters
     let coordinates = req.body.avgPoint;
 
     places(searchString, distance, coordinates)
     .then(places => {
-      // console.log('results: ', places.results);
+      console.log('results: ', places.results);
       return db.savePlace(places.results, searchString);
     })
     .then(() => {
