@@ -1,7 +1,7 @@
 # Gather
 A social app for finding places and meeting with your friends in the middle
 
-![](https://github.com/kogisu/Gather/blob/master/gather.png)
+![](https://github.com/kogisu/Gather/blob/master/gather_capture.png)
 
 Add as many of your friends as possible and find the center spot so everyone can compromise to find a place where they can have fun.
 
