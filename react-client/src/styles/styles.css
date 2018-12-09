@@ -9,7 +9,7 @@
 .container {
   font-family: 'Roboto,Arial,Helvetica,sans-serif';
   display: grid;
-  grid-template-rows: 220px 500px 100px 100px 100px 1fr;
+  grid-template-rows: 180px 500px 100px 100px 100px 1fr;
 }
 
 .headerBar {
@@ -46,8 +46,17 @@
   width: 200px;
 }
 
+.gatherFriend {
+  height: 27px;
+  position: relative;
+  left: 280px;
+  top: -64px;
+}
 .clearFriends {
-  height: 30px;
+  height: 27px;
+  position: relative;
+  left: 280px;
+  top: -68px;
 }
 
 .addressForm {

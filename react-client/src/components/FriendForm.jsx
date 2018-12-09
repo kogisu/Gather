@@ -40,12 +40,12 @@ export default class FriendForm extends React.Component {
       <div className={styles.friendForm}>
         <form onSubmit={this.handleSubmit}>
           <div className={styles.nameForm}>
-            Name: <input className={styles.name}type="text" name="name" value={this.state.name} onChange={this.handleChange}/>
+            Name: <input className={styles.name} type="text" name="name" value={this.state.name} onChange={this.handleChange}/>
           </div>
           <div className={styles.addressForm}>
             Address: <input className={styles.address} type="text" name="address" value={this.state.address} onChange={this.handleChange}/>
           </div>
-          <input name="gatherFriend" type="submit" value="Gather Friend" />
+          <input className={styles.gatherFriend} name="gatherFriend" type="submit" value="Gather Friend" />
         </form>
         <form onSubmit={this.handleClear}>
           <input className={styles.clearFriends} name="clearFriends" type="submit" value="Clear Friends" />
